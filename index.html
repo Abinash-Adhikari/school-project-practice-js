@@ -4,14 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Carousel using js</title>
+    <style>
+        .carousel {
+            height: 50vh;
+            width: 50vw;
+            margin-bottom: 2rem;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .images img {
+            height: 100%;
+            width: 100%;
+            /* object-fit: cover; */
+        }
+
+        .controls {
+            margin-top: 2rem;
+        }
+
+        .controls button {
+            padding: 1rem 2rem;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="carousel">
+        <div class="images" id="display_image">
 
+            <!-- <img src="./photos/photo_2.jpeg" alt="Image 2">
+            <img src="./photos/photo_3.jpeg" alt="Image 3"> -->
+        </div>
+        <div class="controls">
+            <button onclick="imagePrev()">Previous</button>
+            <button onclick="imageNext()">Next</button>
+        </div>
+    </div>
     <script>
+        const images = [
+            '<img src="./photos/photo_1.jpeg" alt="Image 1">',
+            '<img src="./photos/photo_2.jpeg" alt="Image 2">',
+            '<img src="./photos/photo_3.jpeg" alt="Image 3">'
+        ];
+
+        const displayPoint = document.getElementById('display_image');
+        let currentIndex = 0;
+        displayPoint.innerHTML = images[currentIndex];
 
 
+        function imagePrev() {
+            if (currentIndex < 1) {
+                currentIndex = images.length - 1;
+            } else {
+                currentIndex--;
+            }
+            displayPoint.innerHTML = images[currentIndex];
+        }
+
+        function imageNext() {
+            if (currentIndex >= images.length - 1) {
+                currentIndex = 0;
+            } else {
+                currentIndex++;
+            }
+            displayPoint.innerHTML = images[currentIndex];
+
+        }
+
+        setInterval(imageNext, 5000);
     </script>
 </body>
 
