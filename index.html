@@ -4,86 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do App</title>
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>My Todo List</h1>
-        <input type="text" id="todo-input" placeholder="Add a new todo...">
-        <button onclick="addToDo()" id="add-todo">Add Your Todo</button>
-
-        <table border="1" style="width: 100%;border-collapse: collapse; margin-top: 2rem;text-align: center;">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task...">
+        <button id="addTaskButton">Add Task</button>
+        <table id="taskTable">
             <thead>
                 <tr>
-                    <th>SN</th>
-                    <th>Title</th>
-                    <th>Completed</th>
+                    <th>Task</th>
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="todo_tbody">
-            </tbody>
+            <tbody id="taskList"></tbody>
         </table>
     </div>
-    <script>
-
-        var todos = [];
-        function render() {
-            let html = ``;
-
-            // Function to generate todo rows 
-            todos.forEach((element, index) => {
-                index++;
-                html += ` 
-            <tr>
-                    <td>${index}</td>
-                    <td>${element.title}</td>
-                    <td>${element.completed}</td>
-                    <td>
-                        <button onclick="makeComplete(${element.id})" class="complete-btn">Complete</button>
-                        <button onclick="deleteTodo(${element.id})" class="delete-btn">Delete</button>
-                    </td>
-            </tr>
-            `;
-            });
-
-            document.getElementById('todo_tbody').innerHTML = html;
-        }
-
-        function addToDo() {
-            const intputValue = document.getElementById('todo-input');
-            let toDo = {
-                id: todos.length + 1 * 100,
-                title: intputValue.value,
-                completed: false
-            }
-            todos = [...todos, toDo];
-            intputValue.value = '';
-            render();
-        }
-
-        function makeComplete(id) {
-            todos.forEach(value => {
-                if (value.id === id) {
-                    value.completed = !value.completed;
-                }
-            })
-            render();
-        }
-
-        function deleteTodo(id) {
-            const confirmation = confirm("Are you sure you want to delete?");
-            if (confirmation) {
-                todos = todos.filter(value => value.id !== id);
-                render();
-            } else {
-                return;
-            }
-        }
-
-        window.onload = render();
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
